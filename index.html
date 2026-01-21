@@ -9,163 +9,68 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
-
-  <!-- QR Code -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 
   <script>
     tailwind.config = {
       darkMode: "class",
       theme: {
         extend: {
-          colors: {
-            primary: "#2C5F71",
-          },
-          fontFamily: {
-            sans: ["Inter", "sans-serif"],
-          },
-        },
-      },
-    };
+          colors: { primary: "#2C5F71" },
+          fontFamily: { sans: ["Inter", "sans-serif"] }
+        }
+      }
+    }
   </script>
 </head>
 
-<body class="bg-slate-100 dark:bg-slate-900 font-sans transition-colors duration-300 flex justify-center p-4">
+<body class="bg-slate-100 dark:bg-slate-900 font-sans flex justify-center p-4 transition-colors">
 
-  <div class="w-full max-w-md space-y-4 pb-40">
+<div class="w-full max-w-md">
 
-    <!-- CARD -->
-    <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-xl overflow-hidden relative animate-fade-in">
+  <!-- CARD -->
+  <div class="relative bg-white dark:bg-slate-800 rounded-3xl shadow-xl overflow-hidden">
 
-      <!-- HEADER -->
-      <div class="relative h-44 bg-primary flex flex-col items-center justify-center text-white text-center px-4">
-        <h1 class="text-lg font-bold tracking-[0.3em]">KAKUN TRADING PLC</h1>
-        <p class="text-xs italic opacity-80 mt-1">Coffee from its original area</p>
+    <!-- HEADER -->
+    <div class="h-44 bg-primary flex flex-col items-center justify-center text-white text-center relative">
+      <h1 class="text-lg font-bold tracking-[0.35em]">KAKUN TRADING PLC</h1>
+      <p class="text-xs italic opacity-80 mt-1">Coffee from its original area</p>
 
-        <!-- Dark Mode -->
-        <button onclick="toggleDark()" class="absolute top-4 right-4 bg-black/20 rounded-full p-2">
-          <span class="material-symbols-outlined">dark_mode</span>
-        </button>
-      </div>
+      <button onclick="document.documentElement.classList.toggle('dark')" class="absolute top-4 right-4 bg-black/20 rounded-full p-2">
+        <span class="material-symbols-outlined">dark_mode</span>
+      </button>
+    </div>
 
-      <!-- PROFILE IMAGE -->
-      <div class="absolute left-1/2 top-36 -translate-x-1/2 z-20">
-        <div class="w-24 h-24 rounded-2xl overflow-hidden border-4 border-white dark:border-slate-800 shadow-lg bg-slate-200">
-          <img src="assets/profile.jpg" class="w-full h-full object-cover block" alt="Misgana Aschalew">
-        </div>
-      </div>
-
-      <!-- INFO -->
-      <div class="pt-16 pb-8 px-6 text-center">
-        <h2 class="text-2xl font-extrabold text-primary dark:text-white">Misgana Aschalew</h2>
-        <p class="text-xs uppercase tracking-widest text-slate-500 mt-2" data-en="Export Manager & International Trade Executive" data-am="የላኪ አስተዳዳሪ እና ዓለም አቀፍ ንግድ አስፈፃሚ">
-          Export Manager & International Trade Executive
-        </p>
+    <!-- AVATAR (FIXED) -->
+    <div class="absolute left-1/2 top-[140px] -translate-x-1/2 z-30">
+      <div class="w-24 h-24 rounded-2xl border-4 border-white dark:border-slate-800 shadow-xl bg-slate-200 overflow-hidden flex items-center justify-center">
+        <img
+          src="./assets/profile.jpg"
+          alt="Misgana Aschalew"
+          class="w-full h-full object-cover"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        >
+        <!-- Fallback icon -->
+        <span class="material-symbols-outlined text-slate-400 text-5xl hidden">
+          person
+        </span>
       </div>
     </div>
 
-    <!-- ACTION BUTTONS -->
-    <div class="space-y-3 animate-slide-up">
-
-      <a href="tel:+251927161250" class="action-btn">
-        📞 Call
-      </a>
-
-      <a href="https://kakuntrading.com" target="_blank" class="action-btn">
-        🌐 Company Website
-      </a>
-
-      <a href="https://maps.google.com/?q=Addis+Ababa+Ethiopia" target="_blank" class="action-btn">
-        📍 Google Maps Location
-      </a>
-
-      <a href="assets/company-profile.pdf" download class="action-btn">
-        📄 Download Company Profile
-      </a>
-
-      <button onclick="saveContact()" class="action-btn bg-primary text-white">
-        💾 Save Contact
-      </button>
-
-      <!-- LANGUAGE -->
-      <button onclick="toggleLang()" class="text-xs uppercase tracking-widest text-slate-500 text-center w-full">
-        🌍 Switch Language
-      </button>
-
-      <!-- QR -->
-      <div class="bg-white dark:bg-slate-800 rounded-2xl p-4 text-center">
-        <p class="text-xs mb-2 text-slate-500">Scan to open card</p>
-        <div id="qrcode" class="flex justify-center"></div>
-      </div>
+    <!-- CONTENT -->
+    <div class="pt-20 pb-8 px-6 text-center">
+      <h2 class="text-2xl font-extrabold text-primary dark:text-white">
+        Misgana Aschalew
+      </h2>
+      <p class="text-xs uppercase tracking-widest text-slate-500 mt-2">
+        Export Manager & International Trade Executive
+      </p>
     </div>
 
   </div>
 
-<script>
-  function toggleDark() {
-    document.documentElement.classList.toggle("dark");
-  }
-
-  function saveContact() {
-    const vcard = `BEGIN:VCARD
-VERSION:3.0
-N:Aschalew;Misgana
-FN:Misgana Aschalew
-ORG:Kakun Trading PLC
-TITLE:Export Manager
-TEL:+251927161250
-EMAIL:misgana7aschlew@gmail.com
-END:VCARD`;
-
-    const blob = new Blob([vcard], { type: "text/vcard" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = "Misgana_Aschalew.vcf";
-    a.click();
-  }
-
-  let lang = "en";
-  function toggleLang() {
-    lang = lang === "en" ? "am" : "en";
-    document.querySelectorAll("[data-en]").forEach(el => {
-      el.textContent = el.dataset[lang];
-    });
-  }
-
-  new QRCode(document.getElementById("qrcode"), {
-    text: window.location.href,
-    width: 120,
-    height: 120,
-  });
-</script>
-
-<style>
-  .action-btn {
-    display: block;
-    width: 100%;
-    padding: 14px;
-    text-align: center;
-    border-radius: 16px;
-    background: white;
-    font-weight: 600;
-    transition: transform .2s;
-  }
-  .action-btn:hover {
-    transform: scale(1.03);
-  }
-  @keyframes fade-in {
-    from {opacity:0}
-    to {opacity:1}
-  }
-  @keyframes slide-up {
-    from {opacity:0; transform:translateY(20px)}
-    to {opacity:1; transform:translateY(0)}
-  }
-  .animate-fade-in { animation: fade-in .6s ease }
-  .animate-slide-up { animation: slide-up .6s ease }
-</style>
+</div>
 
 </body>
 </html>
